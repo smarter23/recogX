@@ -1,5 +1,7 @@
 import React from 'react';
 import Nav from './nav';
+import Chat from './chat';
+
 
 
 class Explore extends React.Component {
@@ -35,7 +37,7 @@ class Explore extends React.Component {
                     <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
                   </div>
               </div> 
-
+              <Chat />
               <Nav />
           </div>
       )
