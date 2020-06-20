@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Radio } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
+import Nav from './nav';
 
 class Analyze extends React.Component {
     render() {
@@ -16,6 +17,8 @@ class Analyze extends React.Component {
               </div>
               <Button size="large">Upload PDF</Button>
               <div className="results"></div>
+
+              <Nav />
           </div>
       )
     }

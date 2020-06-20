@@ -23,6 +23,53 @@
 }
 .communities{
   margin-left: 20vw;
+  padding-bottom: 100px;
+}
+/* Main page cdd */
+.ant-tabs-bar, .ant-tabs-nav-container, .ant-tabs-nav-wrap, .ant-tabs-nav-scroll, .ant-tabs-nav, .ant-tabs-nav > div{
+  width: 100%;
+}
+.ant-tabs-tab{
+  width: 40%;
+}
+
+.ant-tabs-bottom .ant-tabs-bottom-bar .ant-tabs-ink-bar{
+  display: none !important;
+}
+
+/* Nav CSS */
+.ant-menu{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 65px;
+  box-shadow: 0px -2px 8px lightgray;
+  background-color: white;
+  opacity: 1;
+  width: 100%;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ant-menu-item{
+  border-bottom: none !important;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+.ant-menu-item a{
+  position: relative;
+  top: 18%;
+}
+.ant-menu-horizontal > .ant-menu-item > a:hover{
+  color: #00d2d2;
+}
+.ant-menu-horizontal > .ant-menu-item-selected > a{
+  color: #00d2d2;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus{
+  background-color: #00d2d2;
 }
 
 @media (max-width: 400px){

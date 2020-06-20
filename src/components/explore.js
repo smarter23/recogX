@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from './nav';
 
 
 class Explore extends React.Component {
@@ -35,7 +36,7 @@ class Explore extends React.Component {
                   </div>
               </div> 
 
-
+              <Nav />
           </div>
       )
     }
