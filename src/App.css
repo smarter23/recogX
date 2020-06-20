@@ -17,9 +17,22 @@
 .mission, .vision{
   margin: 10px 0 50px;
 }
+.community{
+  text-align: left;
+  width: 50vw;
+}
+.communities{
+  margin-left: 20vw;
+}
 
 @media (max-width: 400px){
   .intro{
     display: block;
+  }
+  .communities{
+    margin-left: auto;
+  }
+  .community{
+    width: auto;
   }
 }
