@@ -16,6 +16,7 @@
 }
 .mission, .vision{
   margin: 10px 0 50px;
+  text-align: left;
 }
 .community{
   text-align: left;
