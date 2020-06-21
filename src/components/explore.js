@@ -1,41 +1,55 @@
 import React from 'react';
 import Nav from './nav';
 import Chat from './chat';
+import 'firebase/app';
+import 'firebase/storage';
+import 'firebase/database';
+import firebase from './firebase'
 
 
 
 class Explore extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        communities: "",
+    }
+}
+
+  componentDidMount(){
+    this.getUserData();
+  }
+  getUserData = () => {
+    let ref = firebase.database().ref('communities');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      this.setState({communities : state});
+    });
+    console.log('DATA RETRIEVED');
+  }
     render() {
+      const {communities} = this.state;
+      const communitylist = communities.length ? (
+        communities.map(
+          data => {
+            return (
+              <div className="community">
+              <h2> 🌟{ data.name }</h2>
+              <p> { data.bio }</p>
+              <a href={data.link} target="_blank" ><i>Learn More</i></a>  
+            </div>
+            ) 
+          }
+        ) 
+      ) : (
+        <div>
+        </div>
+      )
       return (
           <div>
               <h1> Explore Communities </h1>
               <div className="communities">
-                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>
-                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>                  <div className="community">
-                    <h2> 🌟 Women In Tech </h2>
-                    <p>Non-profit dedicated to educating, equipping and empowering women and girls with the necessary skills to succeed in STEM career fields. Their work includes education in schools as well as mentoring, incubation and acceleration camps, networking events and research. Events are located across Europe.</p>
-                    <a href="https://women-in-tech.org/" target="_blank" >Learn More</a>  
-                  </div>
+                 {communitylist}
               </div> 
               <Chat />
               <Nav />
