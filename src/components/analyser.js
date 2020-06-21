@@ -33,16 +33,19 @@ class Analyze extends React.Component {
           <div>
               <h1> Resume Analysis </h1>
 
-              <div> 
+              <div style={{marginBottom:"5vh"}}> 
                   <p>✨ upload your resume and let our engines do the magic!</p>
                   <p>✨ top analysis and reviews</p>
                   <p>✨ job opportunities</p>
 
               </div>
               {/* <Button size="large">Upload PDF</Button> */}
+              <label style={{backgroundColor: "#D8A1D4", color: 'white', padding: 10, borderRadius: 4, cursor: 'pointer', marginTop:"20px"}}>
+                Upload Resume
               <FileUploader
                 accept="pdf/*"
                 name="avatar"
+                hidden
                 randomizeFilename
                 storageRef={firebase.storage().ref("resume")}
                 onUploadStart={this.handleUploadStart}
@@ -50,6 +53,8 @@ class Analyze extends React.Component {
                 onUploadSuccess={this.handleUploadSuccess}
                 onProgress={this.handleProgress}
             />
+            </label>
+
               <div className="results"></div>
 
               <Chat />

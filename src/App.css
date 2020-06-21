@@ -20,12 +20,47 @@
 }
 .community{
   text-align: left;
-  width: 50vw;
+  width: 45vw;
 }
 .communities{
-  margin-left: 20vw;
+  margin-left: 25vw;
   padding-bottom: 100px;
+  margin-top: 5vh;
 }
+
+/* button */
+button {
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #D8A1D4;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, 
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+  background: #DF8FD9;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
 /* Main page cdd */
 .ant-tabs-bar, .ant-tabs-nav-container, .ant-tabs-nav-wrap, .ant-tabs-nav-scroll, .ant-tabs-nav, .ant-tabs-nav > div{
   width: 100%;
@@ -64,14 +99,15 @@
   top: 18%;
 }
 .ant-menu-horizontal > .ant-menu-item > a:hover{
-  color: #00d2d2;
+  color: #DF8FD9;
 }
 .ant-menu-horizontal > .ant-menu-item-selected > a{
-  color: #00d2d2;
+  color: #DF8FD9;
 }
 .ant-btn-primary:hover, .ant-btn-primary:focus{
-  background-color: #00d2d2;
+  background-color: #DF8FD9;
 }
+
 
 @media (max-width: 400px){
   .intro{

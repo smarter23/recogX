@@ -1,5 +1,6 @@
 import React from 'react';
 import Signin from './signin'
+import recogx from '../assets/recogx.png'
 
 class Intro extends React.Component {
     componentDidMount(){
@@ -10,7 +11,8 @@ class Intro extends React.Component {
     render() {
       return (
           <div>
-              <h1> RecogX </h1>
+              {/* <h1> RecogX </h1> */}
+              <img src={recogx} />
               <div className="intro">
                 <div className="mission">
                     <h3>Mission</h3>
@@ -27,6 +29,8 @@ class Intro extends React.Component {
                 </div>
              </div>
               <Signin logs={this.props}/>
+
+              <footer style={{ bottom:0, padding:"10px", marginTop:"10vh"}}>Made with <span role="img">💖 </span> by Ananya, Eesha, Garima and Iishi </footer>
           </div>
       )
     }

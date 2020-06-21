@@ -36,13 +36,14 @@ class Explore extends React.Component {
               <div className="community">
               <h2> 🌟{ data.name }</h2>
               <p> { data.bio }</p>
-              <a href={data.link} target="_blank" ><i>Learn More</i></a>  
+              <a href={data.link} target="_blank" style={{textDecoration:"none", color:"#F14CE5", fontSize:14}}><i>Learn More</i></a>  
             </div>
             ) 
           }
         ) 
       ) : (
         <div>
+          <p style={{textAlign:"center", position:"fixed", left:"50%"}}>Loading ... </p>
         </div>
       )
       return (

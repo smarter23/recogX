@@ -57,7 +57,7 @@ class Signin extends React.Component {
     render() {
       return (
           <div>
-               <Button size="large" onClick={this.signinHandler}>Sign In <img src={Google} className="google"/></Button>
+               <Button size="large" onClick={this.signinHandler}>Sign In with Google</Button>
           </div>
       )
     }

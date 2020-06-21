@@ -35,10 +35,10 @@ class Nav extends React.Component {
             <div>
                 <Menu onClick={this.handleClick} selectedKeys={this.state.current} mode="horizontal">
                     <Menu.Item key="analyze">
-                    <NavLink to="/analyze" style={{fontSize:16}}>Analyze</NavLink>
+                    <NavLink to="/analyze" style={{fontSize:16, fontWeight:700, textDecoration:"none"}}>Analyze</NavLink>
                     </Menu.Item>
                     <Menu.Item key="explore">
-                    <NavLink to="/explore" style={{fontSize:16}}>Explore</NavLink>
+                    <NavLink to="/explore" style={{fontSize:16, fontWeight:700, textDecoration:"none"}}>Explore</NavLink>
                     </Menu.Item>
                 </Menu>        
             </div>
