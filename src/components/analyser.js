@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Radio } from 'antd';
 import { Avatar } from 'antd';
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import Nav from './nav';
 import Chat from './chat';
 import 'firebase/app';

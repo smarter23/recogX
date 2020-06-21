@@ -7,7 +7,7 @@ import 'firebase/database';
 import firebase from './firebase';
 import recogx from '../assets/recogx.png'
 import { Avatar } from 'antd';
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import { UserOutlined } from '@ant-design/icons';
 
 
