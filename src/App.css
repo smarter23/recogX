@@ -119,4 +119,7 @@ button:active {
   .community{
     width: auto;
   }
+  .sidelogo{
+    display: none;
+  }
 }

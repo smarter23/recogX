@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Radio } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
+import "antd/dist/antd.css";
 import Nav from './nav';
 import Chat from './chat';
 import 'firebase/app';
@@ -8,7 +9,7 @@ import 'firebase/storage';
 import 'firebase/database';
 import firebase from "./firebase";
 import FileUploader from "react-firebase-file-uploader";
-import recogx from '../assets/recogx.png'
+import recogx from '../assets/recogx.png';
 
 
 
@@ -18,6 +19,7 @@ class Analyze extends React.Component {
     super(props);
     this.state = {
         jobs: "",
+        url:""
     }
 }
 
@@ -35,19 +37,26 @@ class Analyze extends React.Component {
 
     
   handleUploadStart = () => console.log("start");
-  handleProgress = progress => console.log(progress)
+  handleProgress = progress => {console.log(progress); this.setState({progress:"Analyzing"})}
   handleUploadError = error => {
     // this.setState({ isUploading: false });
     console.error(error);
   };
   handleUploadSuccess = filename => {
+    let urlu;
     this.setState({ avatar: filename, progress: 100, isUploading: false });
     firebase
       .storage()
       .ref("resume")
       .child(filename)
       .getDownloadURL()
-      .then(url => console.log(url));
+      .then(url => {
+        let urlu = url;
+        console.log(url,urlu)
+        this.setState({url:url})
+      });
+    firebase.database().ref("resumes").child(localStorage.getItem('uid')).set({"link":'', "skills":[''], "uid": localStorage.getItem('uid')})
+
   };
     render() {
 
@@ -60,7 +69,7 @@ class Analyze extends React.Component {
               <h4> 🌟{ data.company }</h4>
               <p> { data.position }</p>
               <p> Skill -  { data.skills }</p>
-              <a href={data.link} target="_blank" style={{textDecoration:"none", color:"#F14CE5", fontSize:14}}><i>Learn More</i></a>  
+              <a href={data.link} target="_blank" style={{textDecoration:"none", color:"#F14CE5", fontSize:14,  marginBottom:"10px"}}><i>Learn More</i></a>  
             </div>
             ) 
           }
@@ -72,9 +81,11 @@ class Analyze extends React.Component {
       )
       return (
           <div>
-              <img src={recogx} style={{position: "fixed",left: "34px",height: "7vh"}}/>
+              <img src={recogx} style={{position: "fixed",left: "34px",height: "7vh"}} className="sidelogo"/>
 
               <h1> Resume Analysis </h1>
+
+              {/* <Avatar style={{ color: '#fffff', backgroundColor: '#DF8FD9',position: "fixed",right: "34px" }}>A</Avatar> */}
 
               <div style={{marginBottom:"5vh"}}> 
                   <p>✨ upload your resume and let our engines do the magic!</p>
@@ -98,6 +109,7 @@ class Analyze extends React.Component {
             />
             </label>
 
+            <div className="results" style={{marginTop:"20px"}}>{this.state.progress}</div>
               
               <div className="communities">
               <h2 style={{textAlign:"left", marginTop:"10px"}}>Job listings</h2>

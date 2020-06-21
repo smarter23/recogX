@@ -35,10 +35,12 @@ class Signin extends React.Component {
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        console.log(user.emailVerified)
+        console.log(user)
+        localStorage.setItem('uid', user.uid);
         
         if(user.emailVerified){
           localStorage.setItem("loggedIn", 1)
+          localStorage.setItem('uid', user.uid);
           console.log('HI', this.props)
           // this.props.logs.history.push('/analyze')
           // return <Redirect to='/analyze' /> ;
