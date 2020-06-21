@@ -4,7 +4,9 @@ import Chat from './chat';
 import 'firebase/app';
 import 'firebase/storage';
 import 'firebase/database';
-import firebase from './firebase'
+import firebase from './firebase';
+import recogx from '../assets/recogx.png'
+
 
 
 
@@ -48,6 +50,7 @@ class Explore extends React.Component {
       )
       return (
           <div>
+              <img src={recogx} style={{position: "fixed",left: "34px",height: "7vh"}}/>
               <h1> Explore Communities </h1>
               <div className="communities">
                  {communitylist}

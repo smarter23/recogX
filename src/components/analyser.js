@@ -8,9 +8,30 @@ import 'firebase/storage';
 import 'firebase/database';
 import firebase from "./firebase";
 import FileUploader from "react-firebase-file-uploader";
+import recogx from '../assets/recogx.png'
+
 
 
 class Analyze extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+        jobs: "",
+    }
+}
+
+  componentDidMount(){
+    this.getUserData();
+  }
+  getUserData = () => {
+    let ref = firebase.database().ref('jobs');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      this.setState({jobs : state});
+    });
+    console.log('DATA RETRIEVED');
+  }
 
     
   handleUploadStart = () => console.log("start");
@@ -29,8 +50,30 @@ class Analyze extends React.Component {
       .then(url => console.log(url));
   };
     render() {
+
+      const {jobs} = this.state;
+      const jobslist = jobs.length ? (
+        jobs.map(
+          data => {
+            return (
+              <div className="community">
+              <h4> 🌟{ data.company }</h4>
+              <p> { data.position }</p>
+              <p> Skill -  { data.skills }</p>
+              <a href={data.link} target="_blank" style={{textDecoration:"none", color:"#F14CE5", fontSize:14}}><i>Learn More</i></a>  
+            </div>
+            ) 
+          }
+        ) 
+      ) : (
+        <div>
+          <p style={{textAlign:"center", position:"fixed", left:"50%"}}>Loading ... </p>
+        </div>
+      )
       return (
           <div>
+              <img src={recogx} style={{position: "fixed",left: "34px",height: "7vh"}}/>
+
               <h1> Resume Analysis </h1>
 
               <div style={{marginBottom:"5vh"}}> 
@@ -55,7 +98,11 @@ class Analyze extends React.Component {
             />
             </label>
 
-              <div className="results"></div>
+              
+              <div className="communities">
+              <h2 style={{textAlign:"left", marginTop:"10px"}}>Job listings</h2>
+                {jobslist}
+              </div>
 
               <Chat />
               <Nav />
