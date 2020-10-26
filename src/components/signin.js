@@ -26,9 +26,9 @@ export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 class Signin extends React.Component {
-  // constructor(props){
-  //   super(props);
-  // }
+  constructor(props){
+    super(props);
+  }
     signinHandler() {
       auth.signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -41,8 +41,9 @@ class Signin extends React.Component {
         if(user.emailVerified){
           localStorage.setItem("loggedIn", 1)
           localStorage.setItem('uid', user.uid);
-          console.log('HI', this.props)
-          // this.props.logs.history.push('/analyze')
+          console.log('DONE')
+          console.log('HI', this.props.logs)
+          this.props.logs.history.push('/analyze')
           // return <Redirect to='/analyze' /> ;
         }
       }).catch(function(error) {

@@ -1,5 +1,6 @@
 import React from 'react';
-import Signin from './signin'
+import Signin from './signin';
+import Login from './login';
 import recogx from '../assets/recogx.png'
 
 class Intro extends React.Component {
@@ -11,7 +12,6 @@ class Intro extends React.Component {
     render() {
       return (
           <div>
-              {/* <h1> RecogX </h1> */}
               <img src={recogx} />
               <div className="intro">
                 <div className="mission">
@@ -28,9 +28,8 @@ class Intro extends React.Component {
                     <p> 🦄 Mentorship: Guidance from top class experts in their fields </p>
                 </div>
              </div>
+             <Login/>
               <Signin logs={this.props}/>
-
-              <footer style={{ bottom:0, padding:"10px", marginTop:"10vh"}}>Made with <span role="img">💖 </span> by Ananya, Eesha, Garima and Iishi </footer>
           </div>
       )
     }

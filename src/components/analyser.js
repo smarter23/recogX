@@ -52,10 +52,10 @@ class Analyze extends React.Component {
       .getDownloadURL()
       .then(url => {
         let urlu = url;
-        console.log(url,urlu)
-        this.setState({url:url})
+        console.log(url,urlu);
+        this.setState({url:url});
+        firebase.database().ref("resumes").child(localStorage.getItem('uid')).set({"link":this.state.url, "skills":[''], "uid": localStorage.getItem('uid')})
       });
-    firebase.database().ref("resumes").child(localStorage.getItem('uid')).set({"link":'', "skills":[''], "uid": localStorage.getItem('uid')})
 
   };
     render() {
