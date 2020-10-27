@@ -3,8 +3,10 @@ import { Drawer, Form, Button, Col, Row, Input, Select, Modal } from 'antd';
 import { Avatar } from 'antd';
 import { AntDesignOutlined } from '@ant-design/icons';
 import FeedbackForm from './feedbackform';
+import firebase from './firebase.js';
 
 const { Option } = Select;
+const { TextArea } = Input;
 
 const layout = {
     labelCol: {
@@ -31,7 +33,7 @@ const feedbackFinish = (values) => {
   };
 
 class DrawerForm extends React.Component {
-  state = { visible: false,  modal2Visible: false };
+  state = { visible: false,  modal2Visible: false, details:'' };
 
   showDrawer = () => {
     this.setState({
@@ -49,7 +51,56 @@ class DrawerForm extends React.Component {
     this.setState({ modal2Visible });
   }
 
+  componentDidMount(){
+    this.getUserData();
+  }
+  getUserData = () =>{
+    let ref = firebase.database().ref('users');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      // console.log(state, firebase.auth().currentUser.uid)
+      console.log(state[firebase.auth().currentUser.uid])
+      let details = state[firebase.auth().currentUser.uid]
+      this.setState({details : details});
+    });
+    console.log('DATA RETRIEVED');
+  }
+
+  // emailUpdate = (e) => {
+  //   console.log(e.target.value)
+  //   this.setState(prevState => ({
+  //     details: {                   
+  //         ...prevState.details,    
+  //         email: e.target.value       
+  //     }
+  //  }))
+  // }
+
+  // bioUpdate = (e) => {
+  //   this.setState(prevState => ({
+  //     details: {                   
+  //         ...prevState.details,    
+  //         introduction: e.target.value       
+  //     }
+  //  }))
+  // }
+
+  updateDetails = (values) => {
+    console.log(values)
+    this.setState({
+      details: {       
+         ...this.state.details, 
+        email: values.email,
+        introduction: values.description   
+      }    
+    });
+    // Update details on firebase
+    firebase.database().ref("users").child(firebase.auth().currentUser.uid).update(this.state.details);
+  }
+
   render() {
+    // console.log(firebase.auth().currentUser)
+    let value = this.state.details.introduction;
     return (
       <>
        <Avatar
@@ -85,15 +136,29 @@ class DrawerForm extends React.Component {
             </div>
           }
         >
-          <Form layout="vertical" hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark onFinish={this.updateDetails}>
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
                   name="name"
                   label="Name"
-                  rules={[{ required: true, message: 'Please enter user name' }]}
+                  rules={[{ message: 'Please enter user name' }]}
+                  value = {this.state.details.name}
                 >
-                  <Input placeholder="Please enter user name" />
+                  <Input placeholder={this.state.details.name}  value = {this.state.details.name} disabled/>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="email"
+                  label="Email"
+                  rules={[{ type:'email', required: true, message: 'Please enter valid email' }]}
+                >
+                  <Input 
+                    placeholder={this.state.details.email}
+                    value = {this.state.details.email}
+                    // onChange = {this.emailUpdate} 
+                    />
                 </Form.Item>
               </Col>
             </Row>
@@ -109,10 +174,23 @@ class DrawerForm extends React.Component {
                     },
                   ]}
                 >
-                  <Input.TextArea rows={4} placeholder="please enter url description" />
+                  <TextArea 
+                    rows={4} 
+                    placeholder={value}
+                    value = {value}
+                    autoSize={{ minRows: 3, maxRows: 5 }} 
+                    // onChange = {this.bioUpdate}
+                  />
+
                 </Form.Item>
               </Col>
             </Row>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol}}>
+              <Button type="primary" htmlType="submit">
+                Save
+              </Button>
+            </Form.Item>
+
           </Form>
         {/* <Button type="primary" onClick={() => this.setModal2Visible(true)}>
             Feedback

@@ -34,10 +34,12 @@ const Login = () => {
     firebase.auth().createUserWithEmailAndPassword(values.user.email, values.user.password)
     .then(function(res){
       console.log(res)
-      if(res.isNewUser){
+      if(res["additionalUserInfo"].isNewUser){
+        console.log('test')
       // Add Details in Firebase
       const details = firebase.database().ref('users');
-      details.push(values.user)
+      details.child(firebase.auth().currentUser.uid).set(values.user)
+      // details.push(values.user)
       // Add redirect 
       localStorage.setItem('loggedIn',1);
       localStorage.setItem('uid', firebase.auth().currentUser.uid);

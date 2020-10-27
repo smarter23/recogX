@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './nav';
 import Chat from './chat';
+import Sidebar from './sidebar';
 import 'firebase/app';
 import 'firebase/storage';
 import 'firebase/database';
@@ -61,6 +62,7 @@ class Explore extends React.Component {
                  {communitylist}
               </div> 
               <Chat />
+              <Sidebar />
               <Nav />
           </div>
       )
