@@ -4,6 +4,7 @@ import { Avatar } from 'antd';
 // import "antd/dist/antd.css";
 import Nav from './nav';
 import Chat from './chat';
+import Sidebar from './sidebar';
 import 'firebase/app';
 import 'firebase/storage';
 import 'firebase/database';
@@ -117,7 +118,9 @@ class Analyze extends React.Component {
               </div>
 
               <Chat />
+              <Sidebar />
               <Nav />
+
           </div>
       )
     }
