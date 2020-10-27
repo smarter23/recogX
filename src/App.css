@@ -11,6 +11,17 @@
 
 .intro{
   display: flex;
+  align-items: baseline;
+}
+.loginTab{
+  width: 40vw;
+}
+.googleSignIn{
+  width: 55%;
+  float: right;
+}
+.intro-flex{
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   margin: 100px 0 0 100px;
@@ -30,7 +41,7 @@
 }
 
 /* button */
-button {
+.gbutton {
   display: inline-block;
   border: none;
   padding: 1rem 2rem;
@@ -48,17 +59,17 @@ button {
   -moz-appearance: none;
 }
 
-button:hover,
-button:focus {
+.gbutton:hover,
+.gbutton:focus {
   background: #DF8FD9;
 }
 
-button:focus {
+.gbutton:focus {
   outline: 1px solid #fff;
   outline-offset: -4px;
 }
 
-button:active {
+.gbutton:active {
   transform: scale(0.99);
 }
 

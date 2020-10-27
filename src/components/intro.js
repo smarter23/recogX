@@ -14,21 +14,23 @@ class Intro extends React.Component {
           <div>
               <img src={recogx} />
               <div className="intro">
-                <div className="mission">
-                    <h3>Mission</h3>
-                    <p> <span role="img">💖 </span> Development: Help you make your mark in the tech field </p> 
-                    <p> <span role="img">💖 </span> Inclusion: Everyone matters and matters equally. </p>
-                    <p> <span role="img">💖 </span> Empowerment: Finding opportunities for all and help them grow in tech </p>
-                </div>
+                <div className="intro-flex">
+                    <div className="mission">
+                        <h3>Mission</h3>
+                        <p> <span role="img">💖 </span> Development: Help you make your mark in the tech field </p> 
+                        <p> <span role="img">💖 </span> Inclusion: Everyone matters and matters equally. </p>
+                        <p> <span role="img">💖 </span> Empowerment: Finding opportunities for all and help them grow in tech </p>
+                    </div>
 
-                <div className="vision">
-                    <h3>Vision</h3>
-                    <p> 🦄 Diversity: Our differences spark innovation and bringing everyone together under the same roof </p>
-                    <p> 🦄 Making a difference: Making a positive change in the world with access to opportunity </p>
-                    <p> 🦄 Mentorship: Guidance from top class experts in their fields </p>
+                    <div className="vision">
+                        <h3>Vision</h3>
+                        <p> 🦄 Diversity: Our differences spark innovation and bringing everyone together under the same roof </p>
+                        <p> 🦄 Making a difference: Making a positive change in the world with access to opportunity </p>
+                        <p> 🦄 Mentorship: Guidance from top class experts in their fields </p>
+                    </div>
                 </div>
-             </div>
-             <Login/>
+                <Login logs={this.props}/>
+              </div>
               <Signin logs={this.props}/>
           </div>
       )
