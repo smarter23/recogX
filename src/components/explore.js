@@ -62,7 +62,7 @@ class Explore extends React.Component {
                  {communitylist}
               </div> 
               <Chat />
-              <Sidebar />
+              <Sidebar />   
               <Nav />
           </div>
       )

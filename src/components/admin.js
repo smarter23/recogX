@@ -40,6 +40,11 @@ class Admin extends React.Component {
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+      if(localStorage.getItem("adminrecogx")){
+        this.props.history.push('/recogx-admin-dashboard')
+    }
+    }
     render(){
         return(
             <div>

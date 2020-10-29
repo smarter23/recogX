@@ -20,7 +20,9 @@ class Analyze extends React.Component {
     super(props);
     this.state = {
         jobs: "",
-        url:""
+        url:"",
+        name:'',
+        yourJobs:''
     }
 }
 
@@ -33,7 +35,32 @@ class Analyze extends React.Component {
       const state = snapshot.val();
       this.setState({jobs : state});
     });
+
+    let ref1 = firebase.database().ref('users');
+    ref1.on('value', snapshot => {
+      const state = snapshot.val();
+      // console.log(state, firebase.auth().currentUser.uid)
+      console.log(state[firebase.auth().currentUser.uid])
+      let details = state[firebase.auth().currentUser.uid]
+      this.setState({name : details.name});
+    });
+
     console.log('DATA RETRIEVED');
+  }
+  getYourJobs = () => {
+    console.log('CALLLED')
+    fetch('https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?search=code',{
+      method:"GET",
+      headers:{
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({yourJobs: data})
+    })
   }
 
     
@@ -44,8 +71,9 @@ class Analyze extends React.Component {
     console.error(error);
   };
   handleUploadSuccess = filename => {
-    let urlu;
-    this.setState({ avatar: filename, progress: 100, isUploading: false });
+    // let urlu;
+    this.getYourJobs();
+    this.setState({ avatar: filename, progress: 'Uploaded!', isUploading: false });
     firebase
       .storage()
       .ref("resume")
@@ -60,8 +88,9 @@ class Analyze extends React.Component {
 
   };
     render() {
-
+      const {name} = this.state;
       const {jobs} = this.state;
+      const {yourJobs} = this.state;
       const jobslist = jobs.length ? (
         jobs.map(
           data => {
@@ -78,6 +107,27 @@ class Analyze extends React.Component {
       ) : (
         <div>
           <p style={{textAlign:"center", position:"fixed", left:"50%"}}>Loading ... </p>
+        </div>
+      )
+
+      // Your Jobs
+      let item = Math.floor(Math.random() * 6);
+      const yourjobslist = yourJobs.length ? (
+        yourJobs.slice(0,item).map(
+          data => {
+            return (
+              <div className="community">
+              <h4> 🌟{ data.company }</h4>
+              <p> { data.title }</p>
+              <p> 🕒 { data.type }</p>
+              <a href={data.url} target="_blank" style={{textDecoration:"none", color:"#F14CE5", fontSize:14,  marginBottom:"10px"}}><i>Learn More</i></a>  
+            </div>
+            ) 
+          }
+        ) 
+      ) : (
+        <div>
+          <p style={{textAlign:"left", position:"relative", marginBottom:'100px'}}>Upload a resume to view Jobs for you!</p>
         </div>
       )
       return (
@@ -113,7 +163,9 @@ class Analyze extends React.Component {
             <div className="results" style={{marginTop:"20px"}}>{this.state.progress}</div>
               
               <div className="communities">
-              <h2 style={{textAlign:"left", marginTop:"10px"}}>Job listings</h2>
+              <h2 style={{textAlign:"left", marginTop:"10px"}}>Job listings for you, {name}</h2>
+                {yourjobslist}
+              <h2 style={{textAlign:"left", marginTop:"100px"}}>Job listings</h2>
                 {jobslist}
               </div>
 

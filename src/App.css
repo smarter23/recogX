@@ -41,14 +41,14 @@
 }
 
 /* button */
-.gbutton {
+.gbutton, .ant-btn-primary {
   display: inline-block;
   border: none;
   padding: 1rem 2rem;
   margin: 0;
   text-decoration: none;
-  background: #D8A1D4;
-  color: #ffffff;
+  background: #D8A1D4 !important;
+  color: #ffffff !important;
   font-family: sans-serif;
   font-size: 1rem;
   cursor: pointer;
@@ -61,7 +61,7 @@
 
 .gbutton:hover,
 .gbutton:focus {
-  background: #DF8FD9;
+  background: #DF8FD9 !important;
 }
 
 .gbutton:focus {
@@ -121,9 +121,20 @@
 }
 
 
-@media (max-width: 400px){
+@media (max-width: 600px){
   .intro{
     display: block;
+  }
+  .googleSignIn{
+    width: auto;
+    float: none;
+  }
+  .intro-flex{
+    margin: auto;
+  }
+  .loginTab{
+    width: auto;
+    margin: auto;
   }
   .communities{
     margin-left: auto;
@@ -133,5 +144,8 @@
   }
   .sidelogo{
     display: none;
+  }
+  .ant-drawer-content-wrapper{
+    width: 300px !important;
   }
 }

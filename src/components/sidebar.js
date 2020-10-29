@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, Modal } from 'antd';
-import { Avatar } from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
+import { Avatar,Divider } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import FeedbackForm from './feedbackform';
 import firebase from './firebase.js';
 
@@ -100,10 +100,13 @@ class DrawerForm extends React.Component {
 
   render() {
     // console.log(firebase.auth().currentUser)
-    let value = this.state.details.introduction;
+    let {details} = this.state;
+    let value = details.introduction;
     return (
       <>
        <Avatar
+            style ={{backgroundColor: '#DF8FD9'}}
+            icon={<UserOutlined />}
             size={{
             xs: 24,
             sm: 32,
@@ -112,7 +115,6 @@ class DrawerForm extends React.Component {
             xl: 80,
             xxl: 100,
             }}
-            icon={<AntDesignOutlined />}
             onClick={this.showDrawer} style={{position:"fixed", right:20, top:50}}
          />
         <Drawer
@@ -195,6 +197,7 @@ class DrawerForm extends React.Component {
         {/* <Button type="primary" onClick={() => this.setModal2Visible(true)}>
             Feedback
         </Button> */}
+        <Divider />
         <FeedbackForm />
         </Drawer>
         {/* <Modal

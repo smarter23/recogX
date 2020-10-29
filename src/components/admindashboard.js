@@ -35,11 +35,25 @@ class AdminDashboard extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            feedback:""
+            feedback:"",
+            resumes:'',
+            users:''
         }
     }
     componentDidMount(){
+        this.getUserData();
         this.getFeedbackData();
+        this.getResumeData();
+      }
+      getUserData = () => {
+        let ref1 = firebase.database().ref('users');
+        ref1.on('value', snapshot => {
+          const state = snapshot.val();
+          // console.log(state, firebase.auth().currentUser.uid)
+          console.log(state[firebase.auth().currentUser.uid])
+          let details = state;
+          this.setState({users : details});
+        });
       }
       getFeedbackData = () => {
         let ref = firebase.database().ref('feedback');
@@ -49,17 +63,46 @@ class AdminDashboard extends React.Component {
         });
         console.log('DATA RETRIEVED');
       }
+      getResumeData = () => {
+        let ref = firebase.database().ref('resumes');
+        ref.on('value', snapshot => {
+          const state = snapshot.val();
+          this.setState({resumes : state});
+        });
+        console.log('RESUMES RETRIEVED');
+      }
     render(){
         const {feedback} = this.state;
+        const {resumes} = this.state;
+        const {users} = this.state;
         let feedbackkeys = Object.keys(feedback);
         const feedbacklist = feedbackkeys.length ? (
           feedbackkeys.map(
             data => {
-                console.log(data)
+                // console.log(data)
               return (
                 <Card title={ feedback[data].title } style={{ width: 400,margin:"auto",marginTop:20 }}>
                 <p> { feedback[data].description }</p>
-                <a mailto={feedback[data].email} style={{textDecoration:"none", color:"#F14CE5", fontSize:14,  marginBottom:"10px"}}><i>Email</i></a>  
+                <a href = {"mailto:" + feedback[data].email} style={{textDecoration:"none", color:"#F14CE5", fontSize:14,  marginBottom:"10px"}}><i>Email</i></a>  
+              </Card>
+              ) 
+            }
+          ) 
+        ) : (
+          <div>
+            <p style={{textAlign:"center", position:"relative"}}>Loading ... </p>
+          </div>
+        )
+        let resumekeys = Object.keys(resumes);
+        const resumelist = resumekeys.length ? (
+          resumekeys.map(
+            data => {
+                console.log(data)
+              return (
+                <Card title={users[data].name + resumes[data].uid} style={{ width: 400,margin:"auto",marginTop:20 }}>
+                <p> { users[data].introduction }</p>
+                <a href = {resumes[data].link} target="_blank" >View Resume</a> <br></br>
+                <a href = {"mailto:" + users[data].email}   style={{textDecoration:"none", color:"#F14CE5", fontSize:14,  marginBottom:"10px"}}><i>Email</i></a>  
               </Card>
               ) 
             }
@@ -180,7 +223,9 @@ class AdminDashboard extends React.Component {
                     {feedbacklist}
                 </Card>
                 </div>
-
+                <Card title="Resumes" style={{ width: 500,marginTop:20 }} bordered={false}>
+                    {resumelist}
+                </Card>
             </div>
         )
     }

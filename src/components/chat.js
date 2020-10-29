@@ -9,7 +9,7 @@ class Analyze extends React.Component {
 
     componentDidMount(){
         (function(d, m){
-            var kommunicateSettings = {"appId":"5b303429df6b9bf5c770f56929772dea","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var kommunicateSettings = {"appId":"ae828bd6258ba97c97f15287aba19fdb","popupWidget":true,"automaticChatOpenOnNavigation":true};
             var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
             s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
             var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
